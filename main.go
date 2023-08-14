@@ -2,42 +2,38 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+	"runtime"
+	"time"
 )
 
-const portNumber = ":8080"
-
-// Home page handler
-func Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "This is the home page")
-}
-
-// About is the about page handler
-func About(w http.ResponseWriter, r *http.Request) {
-	sum := addValues(2, 2)
-	_, _ = fmt.Fprintf(w, fmt.Sprintf("This is the about page and 2 + 2 is %d", sum))
-
-}
-
-func addValues(x, y int) int {
-	return x + y
-}
-
-func Divide(w http.ResponseWriter, r *http.Request) {
-
-}
-
-func divideValues(x, y float32) {
-
-}
-
-// main is the main application fucntion
 func main() {
+	
+	// if t := time.Now(); t.Hour() < 12 {
+	// 	fmt.Println("Ma;ana!")
+	// } else if t.Hour() < 17 {
+	// 	fmt.Println("Tarde!")
+	// } else {
+	// 	fmt.Println("Noche!")
+	// }
 
-	http.HandleFunc("/", Home)
-	http.HandleFunc("/about", About)
-	http.HandleFunc("/divide", Divide)
+	switch  t := time.Now(); {
+	case t.Hour() < 12:
+			fmt.Println("Ma;ana!")
+	case t.Hour() < 17:
+			fmt.Println("Tarde!")
+	default:
+		fmt.Println("Noche!")
+	}
 
-	fmt.Printf("Starting application on port %s", portNumber)
-	_ = http.ListenAndServe(portNumber, nil)
+	os := runtime.GOOS
+	switch os {
+	case "windows":
+		fmt.Println("Go run -> Windows")
+	case "linux":
+		fmt.Println("Go run -> Linux")
+	case "darwin":
+		fmt.Println("Go run -> macOS")
+	default:
+		fmt.Println("Go run -> Otro OS")
+	}
 }
