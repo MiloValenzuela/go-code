@@ -1,0 +1,16 @@
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
+		fmt.Println(rw, "Hello World")
+	})
+
+	//Crea el servidor
+	fmt.Println("Run server: http:localhost:8080")
+	http.ListenAndServe("localhost:8080", nil)
+}
